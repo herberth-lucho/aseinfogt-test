@@ -1,0 +1,84 @@
+<div class="container-xxl pt-3 pb-5">
+  <div class="row my-3 mb-5">
+    <div class="col-12 text-center">
+      <img
+        src="assets/logo.png"
+        alt="logo"
+        srcset="assets/logo.png"
+        class="w-2"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Número items</mat-label>
+        <mat-select [(value)]="limit" (valueChange)="onLimitChange($event)">
+          <mat-option *ngFor="let item of limitList" [value]="item">{{
+            item
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-4">
+      <form class="example-form">
+        <mat-form-field appearance="outline">
+          <mat-icon matPrefix>search</mat-icon>
+          <mat-label>Buscar</mat-label>
+          <input
+            type="text"
+            placeholder="Buscar por nombre"
+            aria-label="nombre"
+            matInput
+            [formControl]="myControl"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            @for (option of filteredOptions | async; track option) {
+            <mat-option [value]="option">{{ option.name }}</mat-option>
+            }
+          </mat-autocomplete>
+          @if (spinner) {
+            <span
+              matSuffix
+              class="spinner-border spinner-border-sm"
+              aria-hidden="true"
+            ></span>
+          }
+          <span class="visually-hidden" role="status">Loading...</span>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="col-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Ordenar</mat-label>
+        <mat-select [(value)]="sort" (valueChange)="onSortChange($event)">
+          <mat-option *ngFor="let item of sortList" [value]="item.id">{{
+            item.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-2">
+      <mat-form-field appearance="outline">
+        <mat-label>Posición</mat-label>
+        <mat-select [(value)]="flow" (valueChange)="onFlowChange($event)">
+          <mat-option *ngFor="let item of flowList" [value]="item.id">{{
+            item.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+    @for (item of pokemons; track $index) {
+    <div class="col">
+      <app-cards [pokemon]="item" (clicked)="openModal($event)"></app-cards>
+    </div>
+    } @if (isFound === false) { @defer (when isFound === false) {
+    <app-no-data-card></app-no-data-card>
+    } }
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<mat-dialog-content>
+  @if (pokemon) {
+  <div class="container">
+    <h1 class="fw-bold text-center">
+      No. {{ pokemon.id }} - {{ pokemon.name | titlecase }}
+    </h1>
+    <div class="details-container">
+      <div class="img-container my-auto">
+        <img [ngSrc]="pokemon.imageUrl" [alt]="pokemon.name" priority width="300" height="300" />
+      </div>
+      <div class="details">
+        <div class="description">
+          <span class="text-justify text-muted">{{ pokemon.description }}</span>
+        </div>
+        <div class="info">
+          <div class="col-1">
+            <p class="label">Altura</p>
+            <p>{{ pokemon.height! / 10 | number }} m</p>
+            <p class="label">Peso</p>
+            <p>{{ pokemon.weight! / 10 | number }} kg</p>
+          </div>
+          <div class="col-2">
+            <p class="label">Categoría</p>
+            <p>{{ pokemon.category }}</p>
+            <p class="label">Habilidad</p>
+            <p>{{ pokemon.ability }}</p>
+          </div>
+        </div>
+
+        <div class="types mb-3">
+          <p>Tipo</p>
+          <span *ngFor="let type of pokemon.types">
+            <span class="badge text-bg-primary custom-badge">
+              {{ type | titlecase }}
+            </span>
+          </span>
+        </div>
+        <div class="weakness">
+          <p>Debilidad</p>
+          <span *ngFor="let weakness of pokemon.weakness">
+            <span class="badge text-bg-success custom-badge">
+              {{ weakness | titlecase }}
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</mat-dialog-content>

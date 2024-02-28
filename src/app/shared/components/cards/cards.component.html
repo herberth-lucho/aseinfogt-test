@@ -1,0 +1,26 @@
+<mat-card class="example-card cursor-pointer align-items-center" (click)="onClicked()">
+  <mat-card-header>
+    <mat-card-title
+      ><h1>No. {{ pokemon.id }} - {{ pokemon.name | titlecase }}</h1></mat-card-title
+    >
+    <mat-card-subtitle>
+      <span *ngFor="let type of pokemon.types">
+        <span class="badge text-bg-primary custom-badge">
+          {{ type | titlecase }}
+        </span>
+      </span>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [ngSrc]="pokemon.imageUrl" [alt]="pokemon.name" priority width="300" height="300" class="my-1" />
+  <mat-card-content>
+    <span *ngFor="let ability of pokemon.abilities">
+      <span class="badge text-bg-success custom-badge">
+        {{ ability | titlecase }}
+      </span>
+    </span>
+  </mat-card-content>
+  <!-- <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions> -->
+</mat-card>
